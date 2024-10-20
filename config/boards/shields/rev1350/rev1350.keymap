@@ -106,31 +106,31 @@
 
     combo_qwerty {
         timeout-ms = <30>;
-        key-positions = <20 21 22 23>;
+        key-positions = <25 26 27 28>;
         bindings = <&tog L_QWERTY>;
     };
 
     combo_wf {
         timeout-ms = <30>;
-        key-positions = <1 2>;
+        key-positions = <2 3>;
         bindings = <&app_sw>;
     };
 
     combo_uy {
         timeout-ms = <30>;
-        key-positions = <7 8>;
+        key-positions = <8 9>;
         bindings = <&kp COLON>;
     };
 
     combo_xc {
         timeout-ms = <30>;
-        key-positions = <21 22>;
+        key-positions = <26 27>;
         bindings = <&kp TAB>;
     };
 
     combo_commadot {
         timeout-ms = <30>;
-        key-positions = <27 28>;
+        key-positions = <32 33>;
         bindings = <&kp SEMI>;
     };
   };
@@ -141,8 +141,8 @@
 
                 base_layer {
                       bindings = <
-&kp TAB   &kp Q          &kp W        &kp F           &kp P           &kp G          &kp J   &kp L           &kp U        &kp Y          &kp SEMI    &kp BSPC
-&kp ESC   &hm LGUI A     &hm LALT R   &hm LCTRL S     &hm LSHFT T     &kp D          &kp H   &hm LSHFT N     &hm LCTRL E  &hm LALT I     &hm LGUI O  &kp SQT
+&kp TAB   &kp Q          &kp W        &kp F           &kp P           &kp G          &kp J   &kp L           &kp U        &kp Y          AS(SEMI)    &kp BSPC
+&kp ESC   &hm LGUI A     &hm LALT R   &hm LCTRL S     &hm LSHFT T     &kp D          &kp H   &hm LSHFT N     &hm LCTRL E  &hm LALT I     &hm LGUI O  AS(SQT)
 &kp DEL   &kp Z          &kp X        &kp C           &kp V           &kp B          &kp K   &kp M           AS(COMMA)    AS(DOT)        AS(SLASH)   &kp RET
                                     &mkp LCLK       &sl L_NUM   &ltf L_NAV SPC   &skq LSHFT  &key_repeat
                         >;
@@ -151,7 +151,7 @@
                 qwerty_layer {
                       bindings = <
 &kp TAB   &kp Q          &kp W          &kp E        &kp R           &kp T          &kp Y          &kp U           &kp I            &kp O           &kp P            &kp BSPC
-&kp ESC   &hm LGUI A     &hm LALT S     &hm LCTRL D  &hm LSHFT F     &kp G          &kp H          &hm LSHFT J     &hm LCTRL K      &hm LALT L      &hm LGUI SEMI    &kp SQT
+&kp ESC   &hm LGUI A     &hm LALT S     &hm LCTRL D  &hm LSHFT F     &kp G          &kp H          &hm LSHFT J     &hm LCTRL K      &hm LALT L      &hm LGUI SEMI    AS(SQT)
 &kp DEL   &kp Z          &kp X          &kp C        &kp V           &kp B          &kp N          &kp M           AS(COMMA)        AS(DOT)         AS(SLASH)        &kp RET
                                     &mkp LCLK       &sl L_NUM   &ltf L_NAV SPC   &skq LSHFT  &key_repeat
                         >;
