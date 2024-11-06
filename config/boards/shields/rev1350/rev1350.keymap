@@ -121,6 +121,12 @@
         bindings = <&kp COLON>;
     };
 
+    combo_rs {
+        timeout-ms = <20>;
+        key-positions = <14 15>;
+        bindings = <&kp TAB>;
+    };
+
     combo_xc {
         timeout-ms = <30>;
         key-positions = <26 27>;
@@ -140,9 +146,9 @@
 
                 base_layer {
                       bindings = <
-&kp TAB   &as DQT Q      &kp W        &kp F           &kp P           &kp G          &kp J   &kp L           &kp U        &kp Y          &kp BSPC    &kp BSPC
+&kp TAB   &as DQT Q      &kp W        &kp F           &kp P           &kp G          &kp J   &kp L           &kp U        &kp Y          AS(SEMI)    &kp BSPC
 &kp ESC   &hm LGUI A     &hm LALT R   &hm LCTRL S     &hm LSHFT T     &kp D          &kp H   &hm LSHFT N     &hm LCTRL E  &hm LALT I     &hm LGUI O  AS(SQT)
-&kp DEL   &kp Z          &kp X        &kp C           &kp V           &kp B          &kp K   &kp M           AS(COMMA)    AS(DOT)        AS(SLASH)   &kp RET
+&kp LPAR  &as LPAR Z     &kp X        &kp C           &kp V           &as RPAR B     &kp K   &kp M           AS(COMMA)    AS(DOT)        AS(SLASH)   &kp RPAR
                                     &mkp LCLK       &sl L_NUM   &ltf L_NAV SPC   &skq LSHFT  &key_repeat
                         >;
                 };
@@ -151,7 +157,7 @@
                       bindings = <
 &kp TAB    &as DQT Q      &kp W          &kp E        &kp R           &kp T          &kp Y          &kp U           &kp I            &kp O           &kp P           &kp BSPC
 &kp ESC    &hm LGUI A     &hm LALT S     &hm LCTRL D  &hm LSHFT F     &kp G          &kp H          &hm LSHFT J     &hm LCTRL K      &hm LALT L      &hm LGUI SEMI   AS(SQT)
-&kp DEL    &kp Z          &kp X          &kp C        &kp V           &kp B          &kp N          &kp M           AS(COMMA)        AS(DOT)         AS(SLASH)       &kp RET
+&kp LPAR   &kp Z          &kp X          &kp C        &kp V           &kp B          &kp N          &kp M           AS(COMMA)        AS(DOT)         AS(SLASH)       &kp RPAR
                                     &mkp LCLK       &sl L_NUM   &ltf L_NAV SPC   &skq LSHFT  &key_repeat
                         >;
                 };
