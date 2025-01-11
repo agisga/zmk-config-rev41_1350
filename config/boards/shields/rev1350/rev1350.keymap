@@ -1,21 +1,16 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/backlight.h>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
-#include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/pointing.h>
+
 
 #define L_BASE   0
 #define L_QWERTY 1
 #define L_NAV    2
-#define L_NUM    3
-#define L_FUN    4
+#define L_MOUSE  3
+#define L_NUM    4
+#define L_FUN    5
 
 #define AS(keycode) &as LS(keycode) keycode
 
@@ -23,6 +18,7 @@
 #define WIN_CUT &kp LC(X)
 #define WIN_CPY &kp LC(C)
 #define WIN_PST &kp LC(V)
+
 
 / {
   behaviors {
@@ -80,16 +76,6 @@
     ZMK_MACRO(dqt_macro,
         bindings = <&kp DQT &kp DQT &kp LEFT>;
     )
-    ZMK_MACRO(fifteen_stars,
-        bindings = <&kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp ASTRK &kp SPC>;
-    )
-    ZMK_MACRO(todo_macro,
-        bindings
-            = <&macro_press &kp LSHFT>
-            , <&macro_tap &kp T &kp O &kp D &kp O &kp SPC>
-            , <&macro_release &kp LSHFT>
-            ;
-    )
     ZMK_MACRO(app_sw,
         bindings
             = <&macro_press &kp LALT &mo L_NAV>
@@ -112,19 +98,20 @@
     combo_wf {
         timeout-ms = <30>;
         key-positions = <2 3>;
+        bindings = <&kp TAB>;
+    };
+
+    combo_td {
+        timeout-ms = <30>;
+        key-positions = <16 17>;
         bindings = <&app_sw>;
+        slow-release;  // to keep alt from the macro held with one finger while repeatedly hitting tab with the other finger
     };
 
     combo_uy {
         timeout-ms = <30>;
         key-positions = <8 9>;
         bindings = <&kp COLON>;
-    };
-
-    combo_rs {
-        timeout-ms = <20>;
-        key-positions = <14 15>;
-        bindings = <&kp TAB>;
     };
 
     combo_xc {
@@ -142,51 +129,60 @@
 
 
   keymap {
-        compatible = "zmk,keymap";
+    compatible = "zmk,keymap";
 
                 base_layer {
                       bindings = <
-&kp TAB   &as DQT Q      &kp W        &kp F           &kp P           &kp G          &kp J   &kp L           &kp U        &kp Y          AS(SEMI)    &kp BSPC
-&kp ESC   &hm LGUI A     &hm LALT R   &hm LCTRL S     &hm LSHFT T     &kp D          &kp H   &hm LSHFT N     &hm LCTRL E  &hm LALT I     &hm LGUI O  AS(SQT)
-&kp LPAR  &as LPAR Z     &kp X        &kp C           &kp V           &as RPAR B     &kp K   &kp M           AS(COMMA)    AS(DOT)        AS(SLASH)   &kp RPAR
-                                    &mkp LCLK       &sl L_NUM   &ltf L_NAV SPC   &skq LSHFT  &key_repeat
+&kp TAB      &as DQT Q      &kp W        &kp F           &kp P           &kp G          &kp J   &kp L           &kp U        &kp Y          &kp BSPC    &kp BSPC
+&mo L_MOUSE  &hm LGUI A     &hm LALT R   &hm LCTRL S     &hm LSHFT T     &kp D          &kp H   &hm LSHFT N     &hm LCTRL E  &hm LALT I     &hm LGUI O  AS(SQT)
+&app_sw      &as LPAR Z     &kp X        &kp C           &kp V           &as RPAR B     &kp K   &kp M           AS(COMMA)    AS(DOT)        AS(SLASH)   AS(SEMI)
+                                                  &mkp LCLK       &sl L_NUM   &ltf L_NAV SPC   &skq LSHFT  &key_repeat
                         >;
                 };
 
                 qwerty_layer {
                       bindings = <
-&kp TAB    &as DQT Q      &kp W          &kp E        &kp R           &kp T          &kp Y          &kp U           &kp I            &kp O           &kp P           &kp BSPC
-&kp ESC    &hm LGUI A     &hm LALT S     &hm LCTRL D  &hm LSHFT F     &kp G          &kp H          &hm LSHFT J     &hm LCTRL K      &hm LALT L      &hm LGUI SEMI   AS(SQT)
-&kp LPAR   &kp Z          &kp X          &kp C        &kp V           &kp B          &kp N          &kp M           AS(COMMA)        AS(DOT)         AS(SLASH)       &kp RPAR
-                                    &mkp LCLK       &sl L_NUM   &ltf L_NAV SPC   &skq LSHFT  &key_repeat
+&kp TAB      &as DQT Q      &kp W          &kp E        &kp R           &kp T          &kp Y          &kp U           &kp I            &kp O           &kp P          &kp BSPC
+&mo L_MOUSE  &hm LGUI A     &hm LALT S     &hm LCTRL D  &hm LSHFT F     &kp G          &kp H          &hm LSHFT J     &hm LCTRL K      &hm LALT L      &hm LGUI SEMI  AS(SQT)
+&app_sw      &kp Z          &kp X          &kp C        &kp V           &kp B          &kp N          &kp M           AS(COMMA)        AS(DOT)         AS(SLASH)      AS(SEMI)
+                                                &mkp LCLK     &sl L_NUM    &ltf L_NAV  SPC    &skq LSHFT  &key_repeat
                         >;
                 };
 
                 nav_layer {
                       bindings = <
-&none   &kp PG_UP   &kp HOME  &kp UP        &kp END     &kp INS     &fifteen_stars &kp RA(Q)    &kp RA(Y)     &kp RA(S)   &kp RA(P)  &none
-&none   &kp PG_DN   &kp LEFT  &kp DOWN      &kp RIGHT   &kp TAB     &todo_macro    &kp LSHFT    &kp LCTRL     &kp LALT    &kp LGUI   &none
-&none   &kp K_APP &kp LC(BSPC)  &kp BSPC    &kp DEL     &kp ESC     &none          &dqt_macro   &paren_macro  &bkt_macro  &brc_macro &none
-                                   &mo L_FUN      &kp RET     &trans         &mo L_FUN    &mo L_FUN
+&trans  &kp PG_UP   &kp HOME  &kp UP        &kp END     &kp INS     &none   &kp RA(Q)    &kp RA(Y)     &kp RA(S)   &kp RA(P)   &none
+&trans  &kp PG_DN   &kp LEFT  &kp DOWN      &kp RIGHT   &kp TAB     &none   &kp LSHFT    &kp LCTRL     &kp LALT    &kp LGUI    &none
+&trans  &kp K_APP &kp LC(BSPC)  &kp BSPC    &kp DEL     &kp ESC     &none   &dqt_macro   &paren_macro  &bkt_macro  &brc_macro  &none
+                                    &mo L_FUN     &kp RET     &trans   &mo L_FUN    &mo L_FUN
+                        >;
+                };
+
+                mouse_layer {
+                      bindings = <
+&trans  &msc SCRL_UP    &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT   &none       &none          &none        &none         &none       &none       &none
+&trans  &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT   &kp TAB     &none          &none        &none         &none       &none       &none
+&trans  &mkp RCLK       &mkp MCLK       &kp BSPC        &kp DEL           &kp ESC     &none          &none        &none         &none       &none       &none
+                                                    &mo L_FUN     &kp RET      &mkp LCLK      &mo L_FUN    &mo L_FUN
                         >;
                 };
 
                 num_layer {
                       bindings = <
-&none  &kp LC(LG(LEFT))  &kp LC(LG(RIGHT))   &kp C_VOL_DN  &kp C_VOL_UP &kp C_MUTE  AS(LBKT)   AS(N7)     AS(N8)  AS(N9)  AS(RBKT)   &none
-&none  &kp LGUI          &kp LALT            &kp LCTRL     &kp LSHFT    &kp CAPS    AS(EQL)    AS(N4)     AS(N5)  AS(N6)  AS(MINUS)  &none
-&none  WIN_UND           WIN_CUT             WIN_CPY       WIN_PST      &none       AS(BSLH)   AS(N1)     AS(N2)  AS(N3)  AS(GRAVE)  &none
-                                                        &none      &trans    &kp UNDER  AS(N0)     AS(SEMI)
+&none   &kp LC(LG(LEFT))  &kp LC(LG(RIGHT))   &kp C_VOL_DN  &kp C_VOL_UP &kp C_MUTE  AS(LBKT)   AS(N7)     AS(N8)  AS(N9)  AS(RBKT)   &none
+&none   &kp LGUI          &kp LALT            &kp LCTRL     &kp LSHFT    &kp CAPS    AS(EQL)    AS(N4)     AS(N5)  AS(N6)  AS(MINUS)  &none
+&none   WIN_UND           WIN_CUT             WIN_CPY       WIN_PST      &none       AS(BSLH)   AS(N1)     AS(N2)  AS(N3)  AS(GRAVE)  &none
+                                                      &none         &trans    &kp UNDER   AS(N0)     AS(SEMI)
                         >;
                 };
 
                 fun_layer {
                       bindings = <
-&none  &none        &none        &none        &none         &none         &kp LA(F4)  &kp F7   &kp F8   &kp F9   &kp F12  &none
-&none  &none        &none        &none        &out OUT_TOG  &sys_reset    &sys_reset  &kp F4   &kp F5   &kp F6   &kp F11  &none
-&none  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3  &bootloader   &bootloader &kp F1   &kp F2   &kp F3   &kp F10  &none
-                                            &none   &bt BT_CLR   &none  &none  &none
+&none   &none            &none            &none            &none         &none         &kp LA(F4)  &kp F7   &kp F8   &kp F9   &kp F12  &none
+&none   &rgb_ug RGB_TOG  &rgb_ug RGB_EFR  &rgb_ug RGB_EFF  &out OUT_TOG  &sys_reset    &sys_reset  &kp F4   &kp F5   &kp F6   &kp F11  &none
+&none   &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3  &bootloader   &bootloader &kp F1   &kp F2   &kp F3   &kp F10  &none
+                                                              &none   &bt BT_CLR   &none  &none  &none
                         >;
                 };
-  };
+        };
 };
